@@ -16,11 +16,11 @@ int dp(int m, int n,int k)
 
 	for (i = 1; i < m; i++)
 	{
-		mat[i][0][0] = mat[i][0][0] + mat[i - 1][0][0];
+		mat[i][0][0] = mat[i][0][0] + mat[i - 1][0][0];        //初始化第一列
 	}
 	for (j = 1; j < n; j++)
 	{
-		mat[0][j][0] = mat[0][j][0] + mat[0][j - 1][0];
+		mat[0][j][0] = mat[0][j][0] + mat[0][j - 1][0];        //初始化第一行
 	}
 	for (int i = 1; i < m; i++)
 	{
@@ -28,10 +28,10 @@ int dp(int m, int n,int k)
 		{
 			{
 				//DP[i][j][s] = DP[i - 1][j][s-1] + mat[i][j], DP[i][j - 1][s-1] + mat[i][j];
-				sort(mat[i - 1][j], mat[i - 1][j] + k, cmp);
+				sort(mat[i - 1][j], mat[i - 1][j] + k, cmp);       //先排序
 				sort(mat[i][j - 1], mat[i][j - 1] + k, cmp);
 				int yb = mat[i][j][0]; //把原本第[i][j]的值保存下来，免得被归并覆盖
-				merge(mat[i - 1][j], mat[i - 1][j] + k, mat[i][j - 1], mat[i][j - 1] + k, mat[i][j], cmp);
+				merge(mat[i - 1][j], mat[i - 1][j] + k, mat[i][j - 1], mat[i][j - 1] + k, mat[i][j], cmp);//再归并
 				for (int p = 0; p < k; p++)
 				{
 					mat[i][j][p] = mat[i][j][p] + yb;   //归并完成后加上第[i][j]本身的值
